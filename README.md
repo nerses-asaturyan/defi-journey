@@ -35,7 +35,7 @@ with a 404 status.
 **Before the first deploy**, set the real values in `assets/config.js`:
 
 ```js
-export const SITE_URL = "https://defijourney.netlify.app"; // <- your Netlify URL
+export const SITE_URL = "https://defi-journey.netlify.app"; // <- your Netlify URL
 export const X_HANDLE = "@NAsaturyan";
 export const SITE_NAME = "DeFi Journey";
 ```
