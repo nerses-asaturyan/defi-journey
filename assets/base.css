@@ -1,0 +1,407 @@
+/* ==========================================================================
+   DeFi Deep-Dive Exams — shared design system.
+
+   Every colour is a custom property so a per-exam `theme` object can override
+   just the accents (see engine.js applyTheme). The defaults below are the
+   roadmap's navy/gold identity, which doubles as the neutral exam theme.
+   ========================================================================== */
+
+:root{
+  /* --- surfaces & ink (shared) --- */
+  --bg:#0C0F1A;
+  --panel:#141926;
+  --panel-2:#1B2130;
+  --line:#262D3F;
+  --line-soft:#1E2536;
+  --ink:#E7EAF2;
+  --dim:#8A92A6;
+  --faint:#5C6376;
+  --code-bg:#090C15;
+
+  /* --- accents: themable per exam --- */
+  --accent:#E4B15A;              /* primary accent  (hub: gold) */
+  --accent-2:#56C6C0;            /* secondary accent (hub: cyan) */
+  --ok:#3DDC97;
+  --bad:#FF5C5C;
+
+  /* --- hub palette (fixed navy/gold identity) --- */
+  --gold:#E4B15A;
+  --gold-dim:rgba(228,177,90,0.13);
+  --cyan:#56C6C0;
+  --cyan-dim:rgba(86,198,192,0.12);
+  --coral:#EB7070;
+  --coral-dim:rgba(235,112,112,0.12);
+  --violet:#9B8CFF;
+  --violet-dim:rgba(155,140,255,0.12);
+
+  /* --- type --- */
+  --display:'Space Grotesk',system-ui,sans-serif;
+  --body:'IBM Plex Sans',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--body);
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  min-height:100vh;
+}
+
+a{color:var(--accent-2)}
+
+/* ==========================================================================
+   HUB  (index.html)
+   ========================================================================== */
+
+body.hub{
+  background-image:
+    linear-gradient(var(--line-soft) 1px,transparent 1px),
+    linear-gradient(90deg,var(--line-soft) 1px,transparent 1px);
+  background-size:44px 44px;
+  background-position:-1px -1px;
+  padding:0 20px 120px;
+}
+body.hub .wrap{max-width:920px;margin:0 auto}
+
+/* ---------- wordmark (shared identity across hub + exams) ---------- */
+.wordmark{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--mono);font-size:14px;font-weight:500;
+  letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink);text-decoration:none;margin-bottom:16px;
+}
+.wordmark::before{
+  content:"";width:9px;height:9px;background:var(--gold);
+  transform:rotate(45deg);flex-shrink:0;
+}
+a.wordmark:hover{color:var(--gold)}
+a.wordmark:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
+
+/* the exam eyebrow carries the wordmark inline: "DeFi Journey · exam 01" */
+.wm-link{color:inherit;text-decoration:none}
+.wm-link:hover{text-decoration:underline}
+.wm-link:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+/* ---------- hero ---------- */
+body.hub header{padding:64px 0 40px;border-bottom:1px solid var(--line)}
+.eyebrow{
+  font-family:var(--mono);font-size:12px;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:20px;
+  display:flex;align-items:center;gap:10px;
+}
+.eyebrow::before{content:"";width:26px;height:1px;background:var(--gold)}
+body.hub h1{
+  font-family:var(--display);font-weight:600;
+  font-size:clamp(34px,6vw,60px);line-height:1.02;letter-spacing:-.02em;
+  margin-bottom:22px;
+}
+body.hub h1 em{font-style:normal;color:var(--gold)}
+.thesis{font-size:clamp(15px,2.2vw,18px);color:var(--dim);max-width:640px}
+.thesis b{color:var(--ink);font-weight:500}
+.thesis code{
+  font-family:var(--mono);font-size:.88em;color:var(--cyan);
+  background:var(--cyan-dim);padding:1px 6px;border-radius:4px;
+}
+
+/* ---------- controls ---------- */
+.controls{
+  position:sticky;top:0;z-index:20;
+  background:linear-gradient(var(--bg) 78%,transparent);
+  padding:22px 0 16px;margin-bottom:8px;
+}
+.ctl-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.ctl-label{
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--faint);margin-right:2px;
+}
+.chip{
+  font-family:var(--mono);font-size:12px;letter-spacing:.04em;
+  color:var(--dim);background:var(--panel);
+  border:1px solid var(--line);border-radius:999px;
+  padding:7px 14px;cursor:pointer;transition:all .18s ease;
+}
+.chip:hover{border-color:var(--faint);color:var(--ink)}
+.chip:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.chip[aria-pressed="true"]{
+  background:var(--gold-dim);border-color:var(--gold);color:var(--gold);
+}
+.ctl-row.secondary{margin-top:12px;justify-content:space-between}
+.ctl-actions{display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+.txt-btn{
+  font-family:var(--mono);font-size:12px;color:var(--cyan);
+  background:none;border:none;cursor:pointer;letter-spacing:.03em;
+  text-decoration:none;padding:0;
+}
+.txt-btn:hover{text-decoration:underline}
+.txt-btn:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+.progress{display:flex;align-items:center;gap:12px;min-width:200px}
+.bar{flex:1;height:5px;background:var(--panel-2);border-radius:99px;overflow:hidden;min-width:110px}
+.bar span{display:block;height:100%;width:0;background:var(--gold);transition:width .4s ease}
+.p-count{font-family:var(--mono);font-size:12px;color:var(--dim);white-space:nowrap}
+
+/* ---------- rail + cards ---------- */
+.track{position:relative;padding-left:0}
+.cat{
+  position:relative;display:grid;grid-template-columns:56px 1fr;
+  gap:0;margin-top:14px;
+}
+.rail{position:relative;display:flex;flex-direction:column;align-items:center}
+.node{
+  font-family:var(--mono);font-size:13px;font-weight:500;
+  width:38px;height:38px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--panel);border:1px solid var(--line);
+  color:var(--dim);flex-shrink:0;transition:all .25s ease;z-index:2;
+}
+.cat.open .node{border-color:var(--gold);color:var(--gold);background:var(--gold-dim)}
+.cat.done .node{border-color:var(--gold);color:var(--bg);background:var(--gold)}
+.line{flex:1;width:1px;background:var(--line);margin-top:2px}
+.cat:last-child .line{display:none}
+
+.card{
+  background:var(--panel);border:1px solid var(--line);
+  border-radius:14px;margin-bottom:6px;overflow:hidden;
+  transition:border-color .2s ease;
+}
+.cat.open .card{border-color:#33405c}
+.card-head{
+  width:100%;text-align:left;background:none;border:none;cursor:pointer;
+  display:flex;align-items:center;gap:16px;padding:18px 20px;color:inherit;
+}
+.card-head:hover{background:var(--panel-2)}
+.card-head:focus-visible{outline:2px solid var(--gold);outline-offset:-2px}
+.head-main{flex:1;min-width:0}
+.cat-title{font-family:var(--display);font-weight:600;font-size:18px;letter-spacing:-.01em}
+.backbone{
+  font-family:var(--mono);font-size:12px;color:var(--cyan);margin-top:3px;
+  display:block;
+}
+.backbone::before{content:"backbone: ";color:var(--faint)}
+.toggle{
+  font-family:var(--mono);font-size:20px;color:var(--faint);
+  width:22px;text-align:center;transition:transform .25s ease;flex-shrink:0;
+}
+.cat.open .toggle{transform:rotate(45deg);color:var(--gold)}
+
+.done-box{
+  flex-shrink:0;width:20px;height:20px;border-radius:5px;
+  border:1px solid var(--line);background:var(--panel-2);
+  cursor:pointer;position:relative;transition:all .18s ease;
+}
+.done-box:hover{border-color:var(--gold)}
+.done-box:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.cat.done .done-box{background:var(--gold);border-color:var(--gold)}
+.cat.done .done-box::after{
+  content:"\2713";position:absolute;inset:0;display:flex;align-items:center;
+  justify-content:center;color:var(--bg);font-size:13px;font-weight:700;
+}
+
+.body{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.body-inner{padding:2px 20px 22px 20px;border-top:1px solid var(--line-soft)}
+
+/* ---------- exam call-to-action (always visible, outside the collapse) --- */
+.card-foot{
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  padding:12px 20px;border-top:1px solid var(--line-soft);
+  background:var(--panel-2);
+}
+.exam-pill{
+  font-family:var(--mono);font-size:12px;letter-spacing:.04em;
+  border-radius:999px;padding:7px 15px;text-decoration:none;
+  transition:all .18s ease;
+}
+a.exam-pill{
+  background:var(--gold-dim);border:1px solid var(--gold);color:var(--gold);
+}
+a.exam-pill:hover{background:var(--gold);color:var(--bg)}
+a.exam-pill:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+button.exam-pill{
+  background:none;border:1px dashed var(--line);color:var(--faint);
+  cursor:not-allowed;
+}
+.exam-best{font-family:var(--mono);font-size:11.5px;color:var(--dim)}
+
+/* ---------- facets ---------- */
+.facet{display:flex;gap:12px;padding:13px 0;border-bottom:1px solid var(--line-soft)}
+.facet:last-of-type{border-bottom:none}
+.tag{
+  font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  padding:3px 8px;border-radius:5px;height:fit-content;white-space:nowrap;
+  margin-top:2px;flex-shrink:0;width:74px;text-align:center;
+}
+.tag.arch{color:var(--cyan);background:var(--cyan-dim)}
+.tag.econ{color:var(--gold);background:var(--gold-dim)}
+.tag.bug{color:var(--coral);background:var(--coral-dim)}
+.facet p{font-size:14.5px;color:var(--dim)}
+.facet p b{color:var(--ink);font-weight:500}
+.facet code{font-family:var(--mono);font-size:.85em;color:var(--cyan)}
+
+/* ---------- resources ---------- */
+.res{margin-top:18px}
+.res-h{
+  font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--faint);margin-bottom:10px;
+}
+.res-list{display:flex;flex-direction:column;gap:7px}
+a.res-item{
+  display:flex;align-items:center;gap:12px;text-decoration:none;
+  background:var(--panel-2);border:1px solid var(--line-soft);
+  border-radius:9px;padding:10px 13px;transition:all .16s ease;
+}
+a.res-item:hover{border-color:var(--cyan);transform:translateX(2px)}
+a.res-item:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+.rtype{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;
+  padding:3px 7px;border-radius:4px;flex-shrink:0;width:56px;text-align:center;
+}
+.rtype.doc{color:var(--cyan);background:var(--cyan-dim)}
+.rtype.book{color:var(--gold);background:var(--gold-dim)}
+.rtype.video{color:var(--violet);background:var(--violet-dim)}
+.rtype.lab{color:var(--coral);background:var(--coral-dim)}
+.res-label{flex:1;font-size:13.5px;color:var(--ink)}
+.res-host{font-family:var(--mono);font-size:11px;color:var(--faint)}
+.res-item .arrow{color:var(--faint);font-family:var(--mono);transition:color .16s}
+a.res-item:hover .arrow{color:var(--cyan)}
+.no-res{font-size:13px;color:var(--faint);font-style:italic;padding:8px 0}
+
+/* ---------- cross-cutting + footnote ---------- */
+.crosscut{
+  margin-top:40px;background:var(--panel);border:1px solid var(--line);
+  border-left:3px solid var(--coral);border-radius:14px;padding:26px 24px;
+}
+.crosscut h2{font-family:var(--display);font-weight:600;font-size:20px;margin-bottom:6px}
+.crosscut .sub{color:var(--dim);font-size:14.5px;margin-bottom:18px;max-width:640px}
+.note{
+  margin-top:32px;font-size:12.5px;color:var(--faint);
+  font-family:var(--mono);line-height:1.7;border-top:1px solid var(--line-soft);
+  padding-top:18px;
+}
+
+/* ==========================================================================
+   EXAM  (exams/<slug>/index.html)
+   ========================================================================== */
+
+body.exam{font-family:var(--display)}
+body.exam .wrap{max-width:760px;margin:0 auto;padding:32px 20px 80px}
+body.exam header{margin-bottom:28px}
+body.exam .eyebrow{
+  color:var(--accent);letter-spacing:.18em;margin-bottom:0;display:block;
+}
+body.exam .eyebrow::before{content:none}
+body.exam h1{font-size:clamp(26px,5vw,40px);font-weight:700;margin:6px 0 4px}
+.sub{color:var(--dim);font-size:15px;max-width:56ch}
+
+.hero-wrap svg{width:100%;height:110px;margin:18px 0 6px;display:block}
+
+.progress-label{
+  font-family:var(--mono);font-size:12px;color:var(--dim);
+  display:flex;justify-content:space-between;gap:12px;
+}
+
+body.exam .card{
+  background:var(--panel);border:1px solid var(--line);border-radius:14px;
+  padding:24px;margin-top:18px;overflow:visible;
+}
+.qcat{
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--accent-2);margin-bottom:10px;
+}
+.q{font-size:18px;font-weight:500;line-height:1.45;margin-bottom:14px}
+body.exam pre{
+  background:var(--code-bg);border:1px solid var(--line);border-radius:8px;
+  padding:14px;font-family:var(--mono);font-size:12.5px;line-height:1.55;
+  overflow-x:auto;margin-bottom:14px;color:#C9C2E8;
+}
+
+.opt{
+  display:block;width:100%;text-align:left;background:var(--panel-2);
+  border:1px solid var(--line);border-radius:10px;padding:13px 15px;
+  margin-bottom:9px;color:var(--ink);font-family:var(--mono);font-size:13.5px;
+  line-height:1.5;cursor:pointer;transition:border-color .15s,background .15s;
+}
+.opt:hover:not(:disabled){border-color:var(--accent)}
+.opt:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.opt.correct{border-color:var(--ok);background:rgba(61,220,151,.08)}
+.opt.wrong{border-color:var(--bad);background:rgba(255,92,92,.08)}
+.opt:disabled{cursor:default;opacity:.9}
+
+.exp{
+  display:none;margin-top:14px;padding:15px;border-left:3px solid var(--accent);
+  background:rgba(255,255,255,.035);
+  background:color-mix(in srgb,var(--accent) 6%,transparent);
+  border-radius:0 10px 10px 0;font-size:14px;line-height:1.6;color:#D8D2EE;
+}
+.exp.show{display:block}
+.exp b{color:var(--ink)}
+
+.nav{display:flex;justify-content:flex-end;margin-top:16px}
+button.next{
+  background:var(--accent);color:#fff;border:none;border-radius:10px;
+  padding:11px 26px;font-family:var(--display);font-weight:700;font-size:15px;
+  cursor:pointer;display:none;
+}
+button.next.show{display:block}
+button.next:hover{filter:brightness(1.1)}
+button.next:focus-visible{outline:2px solid var(--accent-2);outline-offset:3px}
+
+/* ---------- results ---------- */
+.score-big{font-family:var(--mono);font-size:clamp(40px,9vw,64px);font-weight:600}
+.score-big span{color:var(--accent)}
+.verdict{color:var(--dim);margin:4px 0 10px;font-size:15px}
+.best{
+  font-family:var(--mono);font-size:12.5px;color:var(--accent-2);margin-bottom:18px;
+}
+.bar-row{margin-bottom:16px}
+.bar-head{display:flex;justify-content:space-between;gap:12px;font-family:var(--mono);font-size:12.5px;margin-bottom:6px}
+.cbar{height:8px;background:var(--panel-2);border-radius:4px;overflow:hidden}
+.cbar i{display:block;height:100%;background:linear-gradient(90deg,var(--accent-2),var(--accent));border-radius:4px}
+.gaps{margin-top:22px;border-top:1px solid var(--line);padding-top:18px}
+.gaps h3{font-size:15px;margin-bottom:10px}
+.gaps p{font-size:14px;color:var(--dim);line-height:1.6;margin-bottom:10px}
+.gaps b{color:var(--ink)}
+.actions{display:flex;gap:12px;margin-top:24px;flex-wrap:wrap;align-items:center}
+.actions a,.actions button{
+  border-radius:10px;padding:12px 22px;font-family:var(--display);
+  font-weight:700;font-size:14px;cursor:pointer;text-decoration:none;
+}
+.share{background:var(--accent);color:#fff;border:none}
+.share:hover{filter:brightness(1.1)}
+.retry{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.retry:hover{border-color:var(--accent)}
+.actions a:focus-visible,.actions button:focus-visible{outline:2px solid var(--accent-2);outline-offset:3px}
+
+.back-link{
+  display:inline-block;margin-top:26px;font-family:var(--mono);font-size:12px;
+  color:var(--dim);text-decoration:none;
+}
+.back-link:hover{color:var(--accent);text-decoration:underline}
+.back-link:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+/* ==========================================================================
+   RESPONSIVE + MOTION
+   ========================================================================== */
+
+@media(max-width:560px){
+  body.hub{padding:0 14px 90px}
+  .cat{grid-template-columns:44px 1fr}
+  .node{width:32px;height:32px;font-size:11px}
+  .card-head{padding:15px 15px;gap:11px}
+  .card-foot{padding:11px 15px}
+  .tag{width:auto}
+  /* the label already names the source; dropping the host keeps the row
+     (and its trailing arrow) inside the card on narrow screens */
+  .res-host{display:none}
+  .res-label{min-width:0}
+  .facet{flex-direction:column;gap:6px}
+  .progress{width:100%;order:-1;margin-bottom:6px}
+  body.exam .card{padding:18px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  *{transition:none!important;scroll-behavior:auto}
+}

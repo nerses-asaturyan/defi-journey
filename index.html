@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DeFi Journey · Architecture Roadmap</title>
+<meta name="description" content="A dependency-ordered roadmap through the ten DeFi primitives, plus auditor-grade deep-dive exams on the protocols that define them.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/base.css">
+</head>
+<body class="hub">
+<div class="wrap">
+
+  <header>
+    <span class="wordmark">DeFi Journey</span>
+    <div class="eyebrow">Learning path &middot; architecture &middot; economics &middot; audit</div>
+    <h1>The backbone of<br>every <em>DeFi</em> primitive.</h1>
+    <p class="thesis">DeFi is a small set of primitives. Every "new" protocol is a <b>diff against a backbone</b>. Master one archetype per category well enough to rederive its invariant, and new protocols collapse into <i>"what did they change, and what did that break?"</i> Order below is dependency-aware &mdash; <code>AMM</code> and <code>oracles</code> hold up almost everything else.</p>
+  </header>
+
+  <div class="controls">
+    <div class="ctl-row">
+      <span class="ctl-label">Show</span>
+      <button class="chip" data-filter="all" aria-pressed="true">All resources</button>
+      <button class="chip" data-filter="doc" aria-pressed="false">Docs</button>
+      <button class="chip" data-filter="book" aria-pressed="false">Deep dives</button>
+      <button class="chip" data-filter="video" aria-pressed="false">Videos</button>
+      <button class="chip" data-filter="lab" aria-pressed="false">Hands-on</button>
+    </div>
+    <div class="ctl-row secondary">
+      <div class="ctl-actions">
+        <button class="txt-btn" id="expandAll">+ Expand all</button>
+        <a class="txt-btn" id="shareRoadmap" href="https://twitter.com/intent/tweet" target="_blank" rel="noopener">&#8599; Share the roadmap</a>
+      </div>
+      <div class="progress">
+        <span class="p-count" id="pCount">0 / 10 mastered</span>
+        <div class="bar"><span id="pBar"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="track" id="track"></div>
+
+  <div class="crosscut">
+    <h2>Cross-cutting security layer</h2>
+    <p class="sub">Runs under all ten. Treat these as the "what actually broke in production" companion to each backbone &mdash; work the challenges, and keep the finding corpus open per category.</p>
+    <div class="res-list" id="crossList"></div>
+  </div>
+
+  <p class="note">
+    // links verified for books, tools, and courses; doc domains are canonical roots and occasionally reorganize their internal paths.<br>
+    // suggested cadence: one category per week, build the "learn-first" clone before reading the production fork.<br>
+    // exams are auditor-grade and scored locally &mdash; nothing you do here leaves your browser.
+  </p>
+
+</div>
+<script type="module" src="assets/hub.js"></script>
+</body>
+</html>

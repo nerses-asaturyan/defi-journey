@@ -1,0 +1,3 @@
+# Branded 404: unknown paths fall back to the roadmap hub (with a 404 status,
+# so it stays honest for crawlers).
+/*  /index.html  404
