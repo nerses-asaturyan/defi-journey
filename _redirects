@@ -1,3 +1,8 @@
+# The exam scaffold is a template, not a page. Keep it off the live site
+# (the folder still copies fine locally). Must be forced: the file exists,
+# and Netlify serves real files before applying redirects.
+/exams/_template/*  /index.html  404!
+
 # Branded 404: unknown paths fall back to the roadmap hub (with a 404 status,
 # so it stays honest for crawlers).
 /*  /index.html  404
