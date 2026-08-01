@@ -68,22 +68,37 @@ body.hub{
 }
 body.hub .wrap{max-width:920px;margin:0 auto}
 
-/* ---------- wordmark (shared identity across hub + exams) ---------- */
+/* ---------- logo + wordmark (shared identity across hub + exams) ----------
+   The mark is defined once as a mask so it inherits whatever colour the
+   surrounding context wants — gold on the hub, the protocol accent on an
+   exam page. Three milestones on a falling curve: the roadmap rail and the
+   x·y=k curve in one shape. */
+:root{
+  --logo:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M7 25C13 25 19 19 25 7' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' opacity='.45'/%3E%3Ccircle cx='7' cy='25' r='3.5'/%3E%3Ccircle cx='16' cy='20.5' r='3.5'/%3E%3Ccircle cx='25' cy='7' r='3.5'/%3E%3C/svg%3E");
+}
+.wordmark::before,
+.wm-link::before{
+  content:"";display:inline-block;flex-shrink:0;
+  -webkit-mask:var(--logo) center/contain no-repeat;
+          mask:var(--logo) center/contain no-repeat;
+}
+
 .wordmark{
-  display:inline-flex;align-items:center;gap:10px;
-  font-family:var(--mono);font-size:14px;font-weight:500;
-  letter-spacing:.16em;text-transform:uppercase;
+  display:inline-flex;align-items:center;gap:11px;
+  font-family:var(--mono);font-size:15px;font-weight:500;
+  letter-spacing:.15em;text-transform:uppercase;
   color:var(--ink);text-decoration:none;margin-bottom:16px;
 }
-.wordmark::before{
-  content:"";width:9px;height:9px;background:var(--gold);
-  transform:rotate(45deg);flex-shrink:0;
-}
+.wordmark::before{width:26px;height:26px;background:var(--gold)}
 a.wordmark:hover{color:var(--gold)}
 a.wordmark:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
 
-/* the exam eyebrow carries the wordmark inline: "DeFi Journey · exam 01" */
+/* the exam eyebrow carries the lockup inline: "◈ DeFi Journey · exam 01" */
 .wm-link{color:inherit;text-decoration:none}
+.wm-link::before{
+  width:15px;height:15px;background:currentColor;
+  margin-right:7px;vertical-align:-3px;
+}
 .wm-link:hover{text-decoration:underline}
 .wm-link:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 

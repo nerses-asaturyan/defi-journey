@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" role="img" aria-label="DeFi Journey">
+  <rect width="32" height="32" rx="7.5" fill="#0C0F1A"/>
+  <path d="M7 25C13 25 19 19 25 7" fill="none" stroke="#E4B15A" stroke-width="2.4"
+        stroke-linecap="round" opacity=".45"/>
+  <circle cx="7"  cy="25"   r="3.5" fill="#E4B15A"/>
+  <circle cx="16" cy="20.5" r="3.5" fill="#E4B15A"/>
+  <circle cx="25" cy="7"    r="3.5" fill="#E4B15A"/>
+</svg>

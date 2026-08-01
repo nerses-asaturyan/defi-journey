@@ -111,6 +111,8 @@ assets/
   config.js             SITE_URL, X_HANDLE, SITE_NAME — the only place they appear
                         (SITE_NAME drives the wordmark and the exam eyebrow)
   base.css              design system: tokens, layout, hub + exam styles
+  logo.svg              the mark (favicon); the header lockup uses a CSS mask
+                        of the same shape so it inherits each page's accent
   engine.js             shared exam engine — renders any exam from its data
   hub.js                roadmap rendering, exam buttons, mastery persistence
   share.js              X-share helper (tweet text + intent URL)
