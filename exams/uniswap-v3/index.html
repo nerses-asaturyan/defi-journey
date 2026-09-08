@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Uniswap V3 Deep-Dive Exam · DeFi Journey</title>
+<meta name="description" content="72 Uniswap V3 questions with worked answers, from concentrated liquidity math to tick crossing, fee accounting, oracles, and integration security.">
+<link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/base.css">
+</head>
+<body class="exam">
+<div class="wrap">
+  <header id="exam-header"></header>
+  <details class="exam-reading">
+    <summary>Reading guide &amp; exam conventions</summary>
+    <p>Original practice questions to accompany your two main readings:</p>
+    <ul>
+      <li><a href="https://rareskills.io/uniswap-v3-book" target="_blank" rel="noopener">RareSkills — Mastering Uniswap V3</a>: price representation, ticks, real and virtual reserves, and positions.</li>
+      <li><a href="https://uniswapv3book.com/" target="_blank" rel="noopener">Uniswap V3 Development Book</a>: work through milestones 1–6, from the first swap to NFT positions.</li>
+      <li><a href="https://github.com/Uniswap/v3-core/tree/v1.0.0/contracts" target="_blank" rel="noopener">Production V3 core</a> and <a href="https://github.com/Uniswap/v3-periphery/tree/v1.3.0/contracts" target="_blank" rel="noopener">V3 periphery</a>: the reference when a teaching implementation simplifies behavior.</li>
+    </ul>
+    <p>Unless stated otherwise, questions refer to production V3 core and the original V3 SwapRouter / NonfungiblePositionManager. P means raw token1 units per raw token0 unit; s = √P. Human-readable decimal conversions, ignored fees, and ignored rounding are stated explicitly.</p>
+    <p>Six questions per topic, one correct answer each. Every answer includes an explanation and a source to revisit. Best scores stay in this browser; an unfinished attempt resets on reload.</p>
+  </details>
+  <main id="stage"></main>
+  <a class="back-link" href="../../">&larr; back to the roadmap</a>
+</div>
+<script type="module">
+  import { runExam } from "../../assets/engine.js";
+  import data from "./data.js";
+  runExam(data);
+</script>
+</body>
+</html>

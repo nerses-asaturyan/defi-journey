@@ -153,28 +153,31 @@ function writeJSON(key, value) {
 }
 
 /* ---------- exam button, derived from the manifest ---------- */
-const EXAM_BY_NODE = new Map();
-MANIFEST.forEach((e) => EXAM_BY_NODE.set(e.roadmapNode, e));
+const EXAMS_BY_NODE = new Map();
+MANIFEST.forEach((exam) => {
+  const exams = EXAMS_BY_NODE.get(exam.roadmapNode) || [];
+  exams.push(exam);
+  EXAMS_BY_NODE.set(exam.roadmapNode, exams);
+});
 
 // Directory URLs are clean when served; file:// needs the explicit filename.
 const isFile = location.protocol === "file:";
 const examHref = (id) => `exams/${id}/${isFile ? "index.html" : ""}`;
 
 function examFoot(nodeNumber) {
-  const exam = EXAM_BY_NODE.get(nodeNumber);
-  if (!exam || exam.status !== "live") {
+  const exams = (EXAMS_BY_NODE.get(nodeNumber) || []).filter((exam) => exam.status === "live");
+  if (!exams.length) {
     return '<div class="card-foot"><button class="exam-pill" disabled>Exam coming soon</button></div>';
   }
-  const best = readJSON(`exam:${exam.id}:best`);
-  const bestLabel = best
-    ? `<span class="exam-best">&middot; Best ${best.score}/${best.total}</span>`
-    : "";
-  return (
-    '<div class="card-foot">' +
-    `<a class="exam-pill" href="${examHref(exam.id)}">Take exam &rarr;</a>` +
-    bestLabel +
-    "</div>"
-  );
+  return '<div class="card-foot">' + exams.map((exam) => {
+    const best = readJSON(`exam:${exam.id}:best`);
+    const bestLabel = best
+      ? `<span class="exam-best">&middot; Best ${best.score}/${best.total}</span>`
+      : "";
+    return '<div class="exam-entry">' +
+      `<a class="exam-pill" href="${examHref(exam.id)}">${exam.protocol} exam &rarr;</a>` +
+      bestLabel + "</div>";
+  }).join("") + "</div>";
 }
 
 function resItem(r) {
